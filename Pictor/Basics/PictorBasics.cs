@@ -19,7 +19,7 @@ namespace Pictor
 		{
 			return (int)(uint)(v + 0.5);
 		}
-		
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -35,10 +35,10 @@ namespace Pictor
 		/// <returns>
 		/// A <see cref="System.Boolean"/>
 		/// </returns>
-		public static bool IsEqualEpsilon(double v1, double v2, double epsilon)
-        {
-            return Math.Abs(v1 - v2) <= (double)(epsilon);
-        }
+		public static bool IsEqualEpsilon (double v1, double v2, double epsilon)
+		{
+			return Math.Abs (v1 - v2) <= (double)(epsilon);
+		}
 	}
 }
 

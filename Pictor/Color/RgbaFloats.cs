@@ -133,14 +133,14 @@ namespace Pictor
 		public RgbaFloats AsRgbaFloats {
 			get { return this; }
 		}
-		
+
 		// <summary>
 		/// 
 		/// </summary>
 		public RgbaDoubles AsRgbaDoubles {
 			get { return new RgbaDoubles ((double)_r, (double)_g, (double)_b, (double)_a); }
 		}
-		
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -173,7 +173,7 @@ namespace Pictor
 		{
 			this._r = this._g = this._b = this._a = 0.0f;
 		}
-		
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -225,8 +225,7 @@ namespace Pictor
 			
 			float s = 1.0f;
 			if (wl > 700.0f)
-				s = 0.3f + 0.7f * (780.0f - wl) / (780.0f - 700.0f); 
-			else if (wl < 420.0)
+				s = 0.3f + 0.7f * (780.0f - wl) / (780.0f - 700.0f); else if (wl < 420.0)
 				s = 0.3f + 0.7f * (wl - 380.0f) / (420.0f - 380.0f);
 			
 			t._r = (float)Math.Pow (t._r * s, gamma);

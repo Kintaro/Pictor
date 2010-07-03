@@ -17,11 +17,11 @@ namespace Pictor
 		/// <summary>
 		/// 
 		/// </summary>
-		int Height {get; }
+		int Height { get; }
 		/// <summary>
 		/// 
 		/// </summary>
-		int StrideInfloats {get; }
+		int StrideInfloats { get; }
 		/// <summary>
 		/// 
 		/// </summary>
@@ -29,7 +29,7 @@ namespace Pictor
 		/// <summary>
 		/// 
 		/// </summary>
-		RectI GetBounds {get;}
+		RectI GetBounds { get; }
 		/// <summary>
 		/// 
 		/// </summary>

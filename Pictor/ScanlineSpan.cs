@@ -5,19 +5,19 @@ namespace Pictor
 	/// 
 	/// </summary>
 	public struct ScanlineSpan
-    {
+	{
 		/// <summary>
 		/// 
 		/// </summary>
-        public int x;
+		public int x;
 		/// <summary>
 		/// 
 		/// </summary>
-        public int Length;
+		public int Length;
 		/// <summary>
 		/// 
 		/// </summary>
-        public int CoverIndex;
-    };
+		public int CoverIndex;
+	}
 }
 

@@ -269,7 +269,7 @@ namespace Pictor.Transform
 			shx = t2;
 			tx = t4;
 		}
-		
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -307,7 +307,7 @@ namespace Pictor.Transform
 			temp.Multiply (b);
 			return temp;
 		}
-		
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -346,7 +346,7 @@ namespace Pictor.Transform
 			Transform (ref rectToTransform.x1, ref rectToTransform.y1);
 			Transform (ref rectToTransform.x2, ref rectToTransform.y2);
 		}
-		
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -375,19 +375,15 @@ namespace Pictor.Transform
 		{
 			InverseTransform (ref pointToTransform.x, ref pointToTransform.y);
 		}
-		
+
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <returns>
 		/// A <see cref="System.Double"/>
 		/// </returns>
-		double DeterminantReciprocal 
-		{
-			get
-			{
-				return 1.0 / (sx * sy - shy * shx);
-			}
+		double DeterminantReciprocal {
+			get { return 1.0 / (sx * sy - shy * shx); }
 		}
 
 		/// <summary>

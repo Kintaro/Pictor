@@ -236,69 +236,70 @@ namespace Pictor.VertexSource
 			
 			while (!quit) {
 				switch (m_status) {
-				case Status.Initial:
-					if (m_font == null) {
-						quit = true;
-						break;
-					}
-					m_status = Status.NextChar;
-					goto case Status.NextChar;
-				
-				case Status.NextChar:
-					if (m_CurrentCharacterIndex == m_Text.Length) {
-						quit = true;
-						break;
-					}
-					int maskedChracter = (int)((m_Text[m_CurrentCharacterIndex++]) & 0xFF);
-					if (maskedChracter == '\r' || maskedChracter == '\n') {
-						m_CurrentX = m_StartX;
-						m_CurrentY -= m_FontSize + m_SpaceBetweenLines;
-						break;
-					}
-					int maskedChracterGlyphIndex = maskedChracter * 2;
-					// we have an x and y in the array so it's * 2.
-					m_BeginGlyphIndex = m_StartOfGlyphsIndex + value (m_StartOfIndicesIndex + maskedChracterGlyphIndex);
-					m_EndGlyphIndex = m_StartOfGlyphsIndex + value (m_StartOfIndicesIndex + maskedChracterGlyphIndex + 2);
-					m_status = Status.StartGlyph;
-					goto case Status.StartGlyph;
-				
-				case Status.StartGlyph:
-					x = m_CurrentX;
-					y = m_CurrentY;
-					m_status = Status.Glyph;
-					return Path.FlagsAndCommand.CommandMoveTo;
-				
-				case Status.Glyph:
-					if (m_BeginGlyphIndex >= m_EndGlyphIndex) {
+					case Status.Initial:
+						if (m_font == null) {
+							quit = true;
+							break;
+						}
 						m_status = Status.NextChar;
-						m_CurrentX += m_SpaceBetweenCharacters;
-						break;
-					}
+						goto case Status.NextChar;
 					
-					sbyte IsAMoveTo_Flag;
-					unchecked {
-						int DeltaX = (sbyte)m_font[m_BeginGlyphIndex++];
-						sbyte yc = (sbyte)m_font[m_BeginGlyphIndex++];
-						
-						IsAMoveTo_Flag = (sbyte)(yc & 0x80);
-						yc <<= 1;
-						yc >>= 1;
-						int DeltaY = (int)(yc);
-						m_CurrentX += (double)(DeltaX) * m_WidthScaleRatio;
-						m_CurrentY += (double)(DeltaY) * m_HeightScaleRatio;
-					}
-
+					case Status.NextChar:
+						if (m_CurrentCharacterIndex == m_Text.Length) {
+							quit = true;
+							break;
+						}
+						int maskedChracter = (int)((m_Text[m_CurrentCharacterIndex++]) & 0xFF);
+						if (maskedChracter == '\r' || maskedChracter == '\n') {
+							m_CurrentX = m_StartX;
+							m_CurrentY -= m_FontSize + m_SpaceBetweenLines;
+							break;
+						}
+						int maskedChracterGlyphIndex = maskedChracter * 2;
+						// we have an x and y in the array so it's * 2.
+						m_BeginGlyphIndex = m_StartOfGlyphsIndex + value (m_StartOfIndicesIndex + maskedChracterGlyphIndex);
+						m_EndGlyphIndex = m_StartOfGlyphsIndex + value (m_StartOfIndicesIndex + maskedChracterGlyphIndex + 2);
+						m_status = Status.StartGlyph;
+						goto case Status.StartGlyph;
 					
-					x = m_CurrentX;
-					y = m_CurrentY;
-					if (IsAMoveTo_Flag != 0) {
+					case Status.StartGlyph:
+						x = m_CurrentX;
+						y = m_CurrentY;
+						m_status = Status.Glyph;
 						return Path.FlagsAndCommand.CommandMoveTo;
-					}
 					
-					return Path.FlagsAndCommand.CommandLineTo;
-				default:
-					
-					throw new System.Exception ("Unknown Status");
+					case Status.Glyph:
+						if (m_BeginGlyphIndex >= m_EndGlyphIndex) {
+							m_status = Status.NextChar;
+							m_CurrentX += m_SpaceBetweenCharacters;
+							break;
+						}
+						
+						sbyte IsAMoveTo_Flag;
+						unchecked {
+							int DeltaX = (sbyte)m_font[m_BeginGlyphIndex++];
+							sbyte yc = (sbyte)m_font[m_BeginGlyphIndex++];
+							
+							IsAMoveTo_Flag = (sbyte)(yc & 0x80);
+							yc <<= 1;
+							yc >>= 1;
+							int DeltaY = (int)(yc);
+							m_CurrentX += (double)(DeltaX) * m_WidthScaleRatio;
+							m_CurrentY += (double)(DeltaY) * m_HeightScaleRatio;
+						}
+
+						
+						
+						x = m_CurrentX;
+						y = m_CurrentY;
+						if (IsAMoveTo_Flag != 0) {
+							return Path.FlagsAndCommand.CommandMoveTo;
+						}
+						
+						return Path.FlagsAndCommand.CommandLineTo;
+					default:
+						
+						throw new System.Exception ("Unknown Status");
 				}
 			}
 			

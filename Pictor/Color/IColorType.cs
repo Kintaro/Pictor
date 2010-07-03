@@ -12,7 +12,7 @@ namespace Pictor
 		RgbaDoubles AsRgbaDoubles { get; }
 		RgbaFloats AsRgbaFloats { get; }
 		RgbaBytes AsRgbaBytes { get; }
-		
+
 		/// <summary>
 		/// 
 		/// </summary>

@@ -29,14 +29,14 @@ namespace Pictor
 		public double this[int index] {
 			get {
 				switch (index) {
-				case 0:
-					return x;
-				case 1:
-					return y;
-				case 2:
-					return z;
-				default:
-					return 0;
+					case 0:
+						return x;
+					case 1:
+						return y;
+					case 2:
+						return z;
+					default:
+						return 0;
 				}
 			}
 		}
@@ -296,11 +296,11 @@ namespace Pictor
 						// x is the biggest y is the smallest
 						DestVector.Set (y / x, -1.0f, 0.0f);
 					}
-				// y > x
+					// y > x
 				} else if (System.Math.Abs (z) > System.Math.Abs (y)) {
 					// z is the biggest x is the smallest
 					DestVector.Set (-1.0f, 0.0f, x / z);
-				// y > x && z < y
+					// y > x && z < y
 				} else {
 					// y is the biggest
 					if (x > z) {

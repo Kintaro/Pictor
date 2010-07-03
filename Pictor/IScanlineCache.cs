@@ -5,14 +5,14 @@ namespace Pictor
 	/// 
 	/// </summary>
 	public interface IScanlineCache
-    {
+	{
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="y">
 		/// A <see cref="System.Int32"/>
 		/// </param>
-        void Finalize(int y);
+		void Finalize (int y);
 		/// <summary>
 		/// 
 		/// </summary>
@@ -22,11 +22,11 @@ namespace Pictor
 		/// <param name="max_x">
 		/// A <see cref="System.Int32"/>
 		/// </param>
-        void Reset(int min_x, int max_x);
+		void Reset (int min_x, int max_x);
 		/// <summary>
 		/// 
 		/// </summary>
-        void ResetSpans();
+		void ResetSpans ();
 		/// <summary>
 		/// 
 		/// </summary>
@@ -36,7 +36,7 @@ namespace Pictor
 		/// <param name="cover">
 		/// A <see cref="System.Int32"/>
 		/// </param>
-		void AddCell(int x, int cover);
+		void AddCell (int x, int cover);
 		/// <summary>
 		/// 
 		/// </summary>
@@ -49,28 +49,28 @@ namespace Pictor
 		/// <param name="cover">
 		/// A <see cref="System.Int32"/>
 		/// </param>
-        void AddSpan(int x, int len, int cover);
-		
+		void AddSpan (int x, int len, int cover);
+
 		/// <summary>
 		/// 
 		/// </summary>
-        int NumberOfSpans { get; }
+		int NumberOfSpans { get; }
 		/// <summary>
 		/// 
 		/// </summary>
-        ScanlineSpan Begin { get; }
+		ScanlineSpan Begin { get; }
 		/// <summary>
 		/// 
 		/// </summary>
-        ScanlineSpan NextScanlineSpan { get; }
+		ScanlineSpan NextScanlineSpan { get; }
 		/// <summary>
 		/// 
 		/// </summary>
-        int y { get; }
+		int y { get; }
 		/// <summary>
 		/// 
 		/// </summary>
-        byte[] Covers { get; }
-    };
+		byte[] Covers { get; }
+	}
 }
 

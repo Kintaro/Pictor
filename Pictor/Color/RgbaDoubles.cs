@@ -133,22 +133,22 @@ namespace Pictor
 		public RgbaDoubles AsRgbaDoubles {
 			get { return this; }
 		}
-		
+
 		/// <summary>
 		/// 
 		/// </summary>
 		public RgbaFloats AsRgbaFloats {
 			get { return new RgbaFloats ((float)_r, (float)_g, (float)_b, (float)_a); }
 		}
-		
+
 		/// <summary>
 		/// 
 		/// </summary>
 		public RgbaBytes AsRgbaBytes {
 			get { return new RgbaBytes (r, g, b, a); }
 		}
-		
-		
+
+
 
 		/// <summary>
 		/// 	Makes this color transparent and returns it
@@ -175,7 +175,7 @@ namespace Pictor
 		{
 			this._r = this._g = this._b = this._a = 0.0;
 		}
-		
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -227,8 +227,7 @@ namespace Pictor
 			
 			double s = 1.0;
 			if (wl > 700.0)
-				s = 0.3 + 0.7 * (780.0 - wl) / (780.0 - 700.0); 
-			else if (wl < 420.0)
+				s = 0.3 + 0.7 * (780.0 - wl) / (780.0 - 700.0); else if (wl < 420.0)
 				s = 0.3 + 0.7 * (wl - 380.0) / (420.0 - 380.0);
 			
 			t._r = Math.Pow (t._r * s, gamma);

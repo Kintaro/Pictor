@@ -434,21 +434,21 @@ namespace Pictor
 		public void Line (double x1, double y1, double x2, double y2, RgbaBytes color)
 		{
 			// TODO
+		}
 			/*PathStorage _LinesToDraw = new PathStorage ();
 			_LinesToDraw.remove_all ();
 			_LinesToDraw.MoveTo (x1, y1);
 			_LinesToDraw.LineTo (x2, y2);
-			ConvStroke StrockedLineToDraw = new ConvStroke (_LinesToDraw);*/
+			ConvStroke StrockedLineToDraw = new ConvStroke (_LinesToDraw);*/			
 			//Render (StrockedLineToDraw, color);
-		}
-
+		
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="rect_d">
 		/// A <see cref="rect_d"/>
 		/// </param>
-		public abstract void SetClippingRect (RectD rectD);
+				public abstract void SetClippingRect (RectD rectD);
 	}
 }
 

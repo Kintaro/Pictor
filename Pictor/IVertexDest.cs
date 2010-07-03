@@ -27,7 +27,9 @@ namespace Pictor
 		/// <param name="i">
 		/// A <see cref="System.Int32"/>
 		/// </param>
-		Vector2D this[int i] { get;	}
+		Vector2D this[int i] {
+			get;
+		}
 	}
 }
 

@@ -10,69 +10,69 @@ namespace Pictor
 		/// 
 		/// </summary>
 		public enum LineCap
-        {
+		{
 			/// <summary>
 			/// 
 			/// </summary>
-            Butt,
+			Butt,
 			/// <summary>
 			/// 
 			/// </summary>
-            Square,
+			Square,
 			/// <summary>
 			/// 
 			/// </summary>
-            Round
-        };
+			Round
+		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-        public enum LineJoin
-        {
+		public enum LineJoin
+		{
 			/// <summary>
 			/// 
 			/// </summary>
-            Miter         = 0,
+			Miter = 0,
 			/// <summary>
 			/// 
 			/// </summary>
-            MiterRevert   = 1,
+			MiterRevert = 1,
 			/// <summary>
 			/// 
 			/// </summary>
-            RoundJoin     = 2,
+			RoundJoin = 2,
 			/// <summary>
 			/// 
 			/// </summary>
-            BevelJoin     = 3,
+			BevelJoin = 3,
 			/// <summary>
 			/// 
 			/// </summary>
-            MiterRound    = 4
-        }
+			MiterRound = 4
+		}
 
 		/// <summary>
 		/// 
 		/// </summary>
-        public enum InnerJoin
-        {
+		public enum InnerJoin
+		{
 			/// <summary>
 			/// 
 			/// </summary>
-            Bevel,
+			Bevel,
 			/// <summary>
 			/// 
 			/// </summary>
-            Miter,
+			Miter,
 			/// <summary>
 			/// 
 			/// </summary>
-            Jag,
+			Jag,
 			/// <summary>
 			/// 
 			/// </summary>
-            Round
+			Round
 		}
 	}
 }
