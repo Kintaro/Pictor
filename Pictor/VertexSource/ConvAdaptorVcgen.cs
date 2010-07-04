@@ -51,7 +51,9 @@ namespace Pictor.VertexSource
 							cmd = m_source.Vertex (out x, out y);
 							//DebugFile.Print("x=" + x.ToString() + " y=" + y.ToString() + "\n");
 						}
-							/*if (Path.is_vertex(cmd))
+
+						
+						/*if (Path.is_vertex(cmd))
                         {
                             m_last_cmd = cmd;
                             if(Path.is_move_to(cmd))
@@ -75,8 +77,8 @@ namespace Pictor.VertexSource
                                 m_generator.AddVertex(x, y, cmd);
                                 break;
                             }
-                        }*/							
-						
+                        }*/
+
 						m_generator.Rewind (0);
 						m_status = Status.Generate;
 						goto case Status.Generate;
@@ -89,7 +91,7 @@ namespace Pictor.VertexSource
                         m_status = Status.Accumulate;
                         break;
                     }*/
-done = true;
+						done = true;
 						break;
 				}
 			}

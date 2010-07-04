@@ -66,6 +66,10 @@
     <Compile Include="Basics\RectD.cs" />
     <Compile Include="Basics\RectI.cs" />
     <Compile Include="Basics\PictorBasics.cs" />
+    <Compile Include="Gamma\GammaPower.cs" />
+    <Compile Include="Gamma\GammaNone.cs" />
+    <Compile Include="Gamma\GammaTreshold.cs" />
+    <Compile Include="Gamma\GammaLinear.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Color\" />
