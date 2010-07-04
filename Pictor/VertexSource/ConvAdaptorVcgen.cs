@@ -10,18 +10,39 @@ namespace Pictor.VertexSource
 			Generate
 		}
 
-		private IVertexSource m_source;
-		private IGenerator m_generator;
-		private IMarkers m_markers;
-		private Status m_status;
-		private Path.FlagsAndCommand m_last_cmd;
-		private double m_start_x;
-		private double m_start_y;
+		private IVertexSource source;
+		private IGenerator generator;
+		private IMarkers markers;
+		private Status status;
+		private Path.FlagsAndCommand lastCommand;
+		private double startX;
+		private double startY;
+
+		public ConvAdaptorVcgen (IVertexSource source, IGenerator generator)
+		{
+			this.markers = null;
+			// TODO NullMarkers();
+			this.source = source;
+			this.generator = generator;
+			this.status = Status.Initial;
+		}
+
+		public ConvAdaptorVcgen (IVertexSource source, IGenerator generator, IMarkers markers) : this(source, generator)
+		{
+			this.markers = markers;
+		}
+
+		protected IGenerator Generator { get { return this.generator; } }
+
+		public void Attach (IVertexSource source)
+		{
+			this.source = source;
+		}
 
 		public void Rewind (int path_id)
 		{
-			m_source.Rewind (path_id);
-			m_status = Status.Initial;
+			source.Rewind (path_id);
+			status = Status.Initial;
 		}
 
 
@@ -32,65 +53,58 @@ namespace Pictor.VertexSource
 			Path.FlagsAndCommand cmd = Path.FlagsAndCommand.CommandStop;
 			bool done = false;
 			while (!done) {
-				switch (m_status) {
+				switch (status) {
 					case Status.Initial:
-						m_markers.RemoveAll ();
-						m_last_cmd = m_source.Vertex (out m_start_x, out m_start_y);
-						m_status = Status.Accumulate;
+						markers.RemoveAll ();
+						lastCommand = source.Vertex (out startX, out startY);
+						status = Status.Accumulate;
 						goto case Status.Accumulate;
 					
 					case Status.Accumulate:
-						// TODO
-						//if (Path.IsStop(m_last_cmd)) return Path.FlagsAndCommand.CommandStop;
+						if (Path.IsStop (lastCommand))
+							return Path.FlagsAndCommand.CommandStop;
 						
-						m_generator.RemoveAll ();
-						m_generator.AddVertex (m_start_x, m_start_y, Path.FlagsAndCommand.CommandMoveTo);
-						m_markers.AddVertex (m_start_x, m_start_y, Path.FlagsAndCommand.CommandMoveTo);
+						generator.RemoveAll ();
+						generator.AddVertex (startX, startY, Path.FlagsAndCommand.CommandMoveTo);
+						markers.AddVertex (startX, startY, Path.FlagsAndCommand.CommandMoveTo);
 						
-						for (;;) {
-							cmd = m_source.Vertex (out x, out y);
-							//DebugFile.Print("x=" + x.ToString() + " y=" + y.ToString() + "\n");
+						while (true) {
+							cmd = source.Vertex (out x, out y);
+							
+							if (Path.IsVertex (cmd)) {
+								lastCommand = cmd;
+								if (Path.IsMoveTo (cmd)) {
+									startX = x;
+									startY = y;
+									break;
+								}
+								generator.AddVertex (x, y, cmd);
+								markers.AddVertex (x, y, Path.FlagsAndCommand.CommandLineTo);
+							} else {
+								if (Path.IsStop (cmd)) {
+									lastCommand = Path.FlagsAndCommand.CommandStop;
+									break;
+								}
+								if (Path.IsEndPoly (cmd)) {
+									generator.AddVertex (x, y, cmd);
+									break;
+								}
+							}
+							
+							generator.Rewind (0);
+							status = Status.Generate;
+							goto case Status.Generate;
 						}
 
 						
-						/*if (Path.is_vertex(cmd))
-                        {
-                            m_last_cmd = cmd;
-                            if(Path.is_move_to(cmd))
-                            {
-                                m_start_x = x;
-                                m_start_y = y;
-                                break;
-                            }
-                            m_generator.AddVertex(x, y, cmd);
-                            m_markers.add_vertex(x, y, Path.FlagsAndCommand.CommandLineTo);
-                        }
-                        else
-                        {
-                            if(Path.is_stop(cmd))
-                            {
-                                m_last_cmd = Path.FlagsAndCommand.CommandStop;
-                                break;
-                            }
-                            if(Path.is_end_poly(cmd))
-                            {
-                                m_generator.AddVertex(x, y, cmd);
-                                break;
-                            }
-                        }*/
-
-						m_generator.Rewind (0);
-						m_status = Status.Generate;
-						goto case Status.Generate;
+						break;
 					
 					case Status.Generate:
-						cmd = m_generator.Vertex (ref x, ref y);
-						//DebugFile.Print("x=" + x.ToString() + " y=" + y.ToString() + "\n");
-												/*if (Path.is_stop(cmd))
-                    {
-                        m_status = Status.Accumulate;
-                        break;
-                    }*/
+						cmd = generator.Vertex (ref x, ref y);
+						if (Path.IsStop (cmd)) {
+							status = Status.Accumulate;
+							break;
+						}
 						done = true;
 						break;
 				}

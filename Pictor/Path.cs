@@ -20,6 +20,26 @@ namespace Pictor
 			FlagClose = 0x40,
 			FlagsMask = 0xF0
 		}
+
+		public static bool IsVertex (FlagsAndCommand command)
+		{
+			return command >= FlagsAndCommand.CommandMoveTo && command < FlagsAndCommand.CommandEndPoly;
+		}
+
+		public static bool IsStop (FlagsAndCommand command)
+		{
+			return command == FlagsAndCommand.CommandStop;
+		}
+
+		public static bool IsMoveTo (FlagsAndCommand command)
+		{
+			return command == FlagsAndCommand.CommandMoveTo;
+		}
+
+		public static bool IsEndPoly (FlagsAndCommand command)
+		{
+			return (command & FlagsAndCommand.CommandsMask) == FlagsAndCommand.CommandEndPoly;
+		}
 	}
 }
 

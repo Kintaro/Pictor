@@ -85,7 +85,7 @@ namespace Pictor
 		{
 			m_DestImage = destImage;
 			m_DestImageFloat = null;
-			rasterizer = rasterizer;
+			this.rasterizer = rasterizer;
 		}
 
 		/// <summary>
@@ -101,7 +101,7 @@ namespace Pictor
 		{
 			m_DestImage = null;
 			m_DestImageFloat = destImage;
-			rasterizer = rasterizer;
+			this.rasterizer = rasterizer;
 		}
 
 		/// <summary>

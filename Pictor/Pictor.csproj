@@ -70,6 +70,8 @@
     <Compile Include="Gamma\GammaNone.cs" />
     <Compile Include="Gamma\GammaTreshold.cs" />
     <Compile Include="Gamma\GammaLinear.cs" />
+    <Compile Include="VertexSource\NullMarkers.cs" />
+    <Compile Include="VertexSource\VcGenStroke.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Color\" />
